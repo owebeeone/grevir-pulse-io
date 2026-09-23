@@ -12,10 +12,11 @@ if(GREVIR_BUILD_COMPILE_CHECKS)
   add_library(grevir_pulse_io_compile OBJECT native_compile.cpp ${header_sources})
   target_link_libraries(grevir_pulse_io_compile PRIVATE grevir::pulse_io)
   set_target_properties(grevir_pulse_io_compile PROPERTIES CXX_EXTENSIONS OFF)
-  if(CMAKE_CXX_COMPILER_ID MATCHES "^(AppleClang|Clang|GNU)$")
+  if(CMAKE_CXX_COMPILER_ID MATCHES "^(AppleClang|Clang|GNU|MSVC)$")
     add_custom_target(grevir_pulse_io_claim_checks ALL
       COMMAND "${CMAKE_COMMAND}"
         "-DCXX=${CMAKE_CXX_COMPILER}"
+      "-DCOMPILER_ID=${CMAKE_CXX_COMPILER_ID}"
         "-DINCLUDE_DIRS=$<TARGET_PROPERTY:grevir_pulse_io_compile,INCLUDE_DIRECTORIES>"
         "-DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}/conflicting_pin_probe.cpp"
         -P "${CMAKE_CURRENT_SOURCE_DIR}/check_claims.cmake"

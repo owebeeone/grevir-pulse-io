@@ -1,13 +1,19 @@
+if(COMPILER_ID STREQUAL "MSVC")
+  set(flags /nologo /std:c++latest /Zc:__cplusplus /Zs /DHAS_STD_LIB=1)
+  set(include_flag /I)
+else()
+  set(flags -std=c++23 -DHAS_STD_LIB=1 -fsyntax-only)
+  set(include_flag -I)
+endif()
 set(include_args)
 foreach(dir IN LISTS INCLUDE_DIRS)
   if(NOT dir STREQUAL "")
-    list(APPEND include_args "-I${dir}")
+    list(APPEND include_args "${include_flag}${dir}")
   endif()
 endforeach()
-execute_process(COMMAND "${CXX}" -std=c++23 -DHAS_STD_LIB=1 ${include_args}
-  -fsyntax-only "${SOURCE}"
+execute_process(COMMAND "${CXX}" ${flags} ${include_args} "${SOURCE}"
   RESULT_VARIABLE result OUTPUT_VARIABLE output ERROR_VARIABLE errors)
-if(result EQUAL 0 OR NOT errors MATCHES "Application has resource conflict")
+if(result EQUAL 0 OR NOT "${output}${errors}" MATCHES "Application has resource conflict")
   message(FATAL_ERROR "Duplicate GPIO claim did not fail as expected: ${output}${errors}")
 endif()
 message(STATUS "Pulse IO duplicate GPIO claim rejected")
