@@ -11,7 +11,8 @@ struct MicrosClock {
 
 using Bits = setl::PweBitCollector<8>;
 using Receive = ardo::PweReceiverModule<
-  ardo::arduino::InputPin<4>, Bits, MicrosClock, unsigned long, 10, 200, 100>;
+  ardo::arduino::InputPin<4, ardo::gpio::InputPinMode::Untied>,
+  Bits, MicrosClock, unsigned long, 10, 200, 100>;
 using Transmit = ardo::PweTransmitterModule<
   ardo::arduino::OutputPin<5>, Bits, MicrosClock, unsigned long, 10, 200, 100>;
 using App = ardo::ArduinoAvrApplication<Receive, Transmit>;
