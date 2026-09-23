@@ -35,8 +35,10 @@ behavior are not established by these host tests.
 `examples/AvrLoopback` is a minimal ATmega328P Arduino sketch. It assigns an
 externally driven input on pin 4 and an output on pin 5 and uses the Arduino
 microsecond clock. The input has no pull-up because the output drives it.
-Compiler validation does not exercise the electrical loopback; connecting the
-pins and checking the waveform remains hardware work.
+That sketch compiles and links for Uno on weftpi with Debian `avr-g++` 14.2 and
+Arduino CLI. A simavr 1.6 probe connects simulated D5 to D4 and decodes a frame;
+see [the target evidence](https://github.com/owebeeone/grevir-wz/blob/main/dev-docs/GrevirPulseIoAvrEvidence.md). A physical
+connection and waveform measurement remain hardware work.
 
 For installed consumers:
 
