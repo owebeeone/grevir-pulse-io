@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.20)
+project(grevir_pulse_io_consumer LANGUAGES CXX)
+find_package(grevir-pulse-io CONFIG REQUIRED)
+add_executable(grevir_pulse_io_consumer main.cpp)
+target_link_libraries(grevir_pulse_io_consumer PRIVATE grevir::pulse_io)
+set_target_properties(grevir_pulse_io_consumer PROPERTIES CXX_EXTENSIONS OFF)
