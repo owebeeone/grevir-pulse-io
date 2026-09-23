@@ -1,5 +1,15 @@
 # Grevir Pulse IO
 
+**Public API:** [Grevir Pulse IO](https://github.com/owebeeone/grevir-wz/blob/main/docs/api/pulse-io.md).
+See [installation](https://github.com/owebeeone/grevir-wz/blob/main/docs/install.md) and
+[supported platforms](https://github.com/owebeeone/grevir-wz/blob/main/docs/supported.md).
+The workspace `/docs` is the current user-facing contract; development
+checkpoints below are historical.
+
+GPIO modules that connect Pulse Codec to injected pins and a clock.
+
+## Development record (historical)
+
 PWE transmitter and receiver modules adapted from Ardoinus
 `pwm_serial_comms.h`. Grevir Pulse Codec owns bit framing and waveform timing;
 this package connects that codec to a caller supplied GPIO pin and clock.
