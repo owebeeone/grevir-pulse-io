@@ -32,6 +32,11 @@ backpressure, readout and conflict-free module composition. The codec's own test
 cover detailed waveform and boundary behavior. Target timing and silicon
 behavior are not established by these host tests.
 
+`examples/AvrLoopback` is a minimal ATmega328P Arduino sketch. It assigns an
+input on pin 4 and an output on pin 5 and uses the Arduino microsecond clock.
+Compiler validation does not exercise the electrical loopback; connecting the
+pins and checking the waveform remains hardware work.
+
 For installed consumers:
 
 ```cmake
